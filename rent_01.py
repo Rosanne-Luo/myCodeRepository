@@ -38,7 +38,11 @@ def craw(url):
         list=list.get('href')
         list="http://bj.58.com"+list
         print(list)
-        getInfo(list)
+        try:
+            getInfo(list)
+        except Exception as e:
+            print('Error', e)
+            pass
     return
 
 csvFile=open('data.csv','w')
