@@ -40,8 +40,8 @@ def getDetailInfo(url):
 
 #对职位进行过滤，返回值为True表示我们需要进一步获取相关信息
 def filterJob(job):
-	w=re.match(whiteFilter,job)
-	b=re.match(blackFilter,job)
+	w=re.search(whiteFilter,job)
+	b=re.search(blackFilter,job)
 	if (w and (not b)):
 		return True
 	else:
@@ -57,7 +57,6 @@ def getJob(url):
 	for tr in trs[1:trNum-1]:
 		urlJob=tr.find('a')['href']
 		job=tr.find('a').text
-		print(job)
 		if not filterJob(job):
 				continue
 		print("[*] get job: %s" % job)
