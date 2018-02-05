@@ -44,7 +44,7 @@ def filterJob(job):
 	b=re.match(blackFilter,job)
 	if (w and (not b)):
 		return True
-	else
+	else:
 		return False
 
 def getJob(url):
@@ -56,7 +56,8 @@ def getJob(url):
 
 	for tr in trs[1:trNum-1]:
 		urlJob=tr.find('a')['href']
-		job=urlJob.find('a').text
+		job=tr.find('a').text
+		print(job)
 		if not filterJob(job):
 				continue
 		print("[*] get job: %s" % job)
@@ -79,7 +80,7 @@ while True:
 	html=request.urlopen(urlPage)
 	if not html:
 		break
-	print('[*] process page %d' % i+1)
+	print('[*] process page %d' % int(i+1))
 	getJob(url)
 	i=i+1
 
