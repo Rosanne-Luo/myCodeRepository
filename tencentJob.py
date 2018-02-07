@@ -2,6 +2,8 @@ from urllib import request
 from bs4 import BeautifulSoup
 import csv
 import re
+import argparse
+
 #深圳，技术类岗位
 url='https://hr.tencent.com/position.php?lid=2218&tid=87&lid=2218&start='
 dataFile="/Users/Rosanne/Desktop/tencentJob.csv"
@@ -68,6 +70,15 @@ def getJob(url):
 			csvWriter.writerow((data[0],releaseData,data[1],data[2],data[3],data[4]))
 		except Exception as e:
 			pass
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-d", "--date", help="only get the info before the given date, the format is 2018-02-06")
+parser.add_argument("-u", "--update", help="just update the exsiting data file", action="store_true")
+args = parser.parse_args()
+if args.date:
+        date=args.date
+if args.update:
+	mode="update"
 
 csvFile=open(dataFile,'w')
 csvWriter=csv.writer(csvFile, delimiter=',')
