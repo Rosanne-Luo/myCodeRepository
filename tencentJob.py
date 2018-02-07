@@ -94,6 +94,7 @@ def main():
 		getJob(url)
 		i=i+1
 
+	csvFile.close()
 	print('[*]finished')
 
 if __name__ == '__main__':
