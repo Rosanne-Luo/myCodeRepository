@@ -70,29 +70,31 @@ def getJob(url):
 			csvWriter.writerow((data[0],releaseData,data[1],data[2],data[3],data[4]))
 		except Exception as e:
 			pass
+def main():
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-d", "--date", help="only get the info before the given date, the format is 2018-02-06")
+	parser.add_argument("-u", "--update", help="just update the exsiting data file", action="store_true")
+	args = parser.parse_args()
+	if args.date:
+        	date=args.date
+	if args.update:
+		mode="update"
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-d", "--date", help="only get the info before the given date, the format is 2018-02-06")
-parser.add_argument("-u", "--update", help="just update the exsiting data file", action="store_true")
-args = parser.parse_args()
-if args.date:
-        date=args.date
-if args.update:
-	mode="update"
+	csvFile=open(dataFile,'w')
+	csvWriter=csv.writer(csvFile, delimiter=',')
+	csvWriter.writerow(('职位','发布时间','工作地点','招聘人数','工作职责','工作要求'))
 
-csvFile=open(dataFile,'w')
-csvWriter=csv.writer(csvFile, delimiter=',')
-csvWriter.writerow(('职位','发布时间','工作地点','招聘人数','工作职责','工作要求'))
+	i=0
+	while True:
+		urlPage=url+str(i*10)+'#a'
+		html=request.urlopen(urlPage)
+		if not html:
+			break
+		print('[*] process page %d' % int(i+1))
+		getJob(url)
+		i=i+1
 
-i=0
-while True:
-	urlPage=url+str(i*10)+'#a'
-	html=request.urlopen(urlPage)
-	if not html:
-		break
-	print('[*] process page %d' % int(i+1))
-	getJob(url)
-	i=i+1
+	print('[*]finished')
 
-print('[*]finished')
-#getJob(url)
+if __name__ == '__main__':
+	main()
