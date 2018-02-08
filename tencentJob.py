@@ -1,6 +1,7 @@
 # 待添加功能：
 # 1. 数据写入mysql
 # 2. 实现多线程
+# 3. 实现scapy架构
 
 from urllib import request
 from bs4 import BeautifulSoup
