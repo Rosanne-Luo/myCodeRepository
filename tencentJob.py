@@ -79,6 +79,7 @@ def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-d", "--date", help="only get the info before the given date, the format is 2018-02-06")
 	parser.add_argument("-u", "--update", help="just update the exsiting data file", action="store_true")
+	parser.add_argument("-c", "--csv", help="save data to csv file")
 	args = parser.parse_args()
 	if args.date:
         	date=args.date
