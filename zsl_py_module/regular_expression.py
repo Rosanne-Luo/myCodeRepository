@@ -6,4 +6,11 @@ def checkIP(value):
 	else:
 		return False
 
-# 匹配hash
+# 从文本中提取所有的UM账号
+# line: 小明<XIAOMING@pingan.com.cn>;小红<XIAOHONG@pingan.com.cn>
+def exactUM(line):
+	result=set()
+	items = re.findall(r"<(.+?)@", line)
+	for um in items:
+		result.add(um)
+	return result
